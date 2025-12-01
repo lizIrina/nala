@@ -90,7 +90,7 @@ html_base = """
     <a class="button" href="{{ button_link }}">{{ button_text }}</a>
     {% endif %}
 
-    <footer>Servidor activo • Flask</footer>
+    <footer>Servidor activo • Flassk</footer>
 
 </body>
 </html>
