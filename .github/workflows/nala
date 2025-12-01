@@ -1,4 +1,4 @@
-name: nala application
+name: irina application
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/nala-app
+  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/irina-app
   IMAGE_TAG: 1.0.5
 
 jobs:
@@ -44,7 +44,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/lizirina/nala-app:1.0.5
+          tags: ghcr.io/lizirina/irina-app:1.0.5
 
       # 6. Debug de secrets (solo para verificar)
       - name: Debug secrets
@@ -82,7 +82,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_SSH_PORT }}
           source: "stack.yml"
-          target: "/home/${{ secrets.VPS_USER }}/nala"
+          target: "/home/${{ secrets.VPS_USER }}/irina"
 
       # 10. Desplegar stack en Swarm
       - name: Deploy stack
@@ -94,7 +94,7 @@ jobs:
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
             echo "Desplegando stack..."
-            cd ~/nala
+            cd ~/irina
 
             echo "PULL DE LA IMAGEN"
             docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ secrets.GHCR_PAT }}
@@ -107,7 +107,7 @@ jobs:
             sleep 20
 
             echo "DESPLEGANDO NUEVO STACK"
-            docker stack deploy --with-registry-auth -c stack.yml nala
+            docker stack deploy --with-registry-auth -c stack.yml irina
 
             echo "SERVICIOS ACTIVOS:"
             docker service ls
