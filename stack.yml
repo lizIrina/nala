@@ -1,30 +1,30 @@
 version: "3.9"
 
 services:
-  irina:
+  nala:
     # ⚠ Cambia <OWNER> por el usuario de GitHub de la chica, igual que en la imagen del pipeline
-    image: ghcr.io/lizirina/irina-app:1.0.5
+    image: ghcr.io/lizirina/nala-app:1.0.5
     deploy:
       replicas: 1
       labels:
         - "traefik.enable=true"
 
         # HTTP
-        - "traefik.http.routers.irina.entrypoints=http"
-        - "traefik.http.routers.irina.rule=Host(`irina.byronrm.com`)"
+        - "traefik.http.routers.nala.entrypoints=http"
+        - "traefik.http.routers.nala.rule=Host(`nala.byronrm.com`)"
 
         # Redirección a HTTPS
-        - "traefik.http.middlewares.irina-https-redirect.redirectscheme.scheme=https"
-        - "traefik.http.routers.irina.middlewares=irina-https-redirect"
+        - "traefik.http.middlewares.nala-https-redirect.redirectscheme.scheme=https"
+        - "traefik.http.routers.nala.middlewares=nala-https-redirect"
 
         # HTTPS
-        - "traefik.http.routers.irina-secure.entrypoints=https"
-        - "traefik.http.routers.irina-secure.rule=Host(`irina.byronrm.com`)"
-        - "traefik.http.routers.irina-secure.tls=true"
-        - "traefik.http.routers.irina-secure.tls.certresolver=http"
+        - "traefik.http.routers.nala-secure.entrypoints=https"
+        - "traefik.http.routers.nala-secure.rule=Host(`nala.byronrm.com`)"
+        - "traefik.http.routers.nala-secure.tls=true"
+        - "traefik.http.routers.nala-secure.tls.certresolver=http"
 
         # Puerto interno de Flask
-        - "traefik.http.services.irina.loadbalancer.server.port=2407"
+        - "traefik.http.services.nala.loadbalancer.server.port=2407"
         - "traefik.docker.network=traefik-public"
 
     networks:
